@@ -1,24 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import NameInput from "./components/NameInput.js"
+import SeeNames from "./components/SeeNames.js"
+
+
+const modeComponents = {
+  "nameInput": NameInput,
+  "seeNames": SeeNames
+}
 
 function App() {
+  const [mode, setMode] = useState("nameInput")
+  const [color, setColor] = useState("lightblue")
+
+  const Component = modeComponents[mode]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div
+      className="column app"
+      >
+
+      <div style={{padding:"1rem", border:"1px solid grey"}}> Padam React Presentation </div>
+
+      <div
+        className="row"
+        style={{padding:"1rem", width:"80%", justifyContent:"space-around", borderBottom:"1px solid grey"}}
         >
-          Learn React
-        </a>
-      </header>
+
+        <div>
+          <button
+            style={{alignSelf:"flex-start"}}
+            onClick={ () => setMode("nameInput") }
+            >
+            Rentrer votre nom
+          </button>
+
+          <button
+            onClick={ () => setMode("seeNames") }
+            >
+            Voir les noms
+          </button>
+        </div>
+
+        <div>
+          <button
+            onClick={ () => setColor("lightblue") }
+            >
+            Enfant bleu
+          </button>
+
+          <button
+            onClick={ () => setColor("lightgreen") }
+            >
+            Enfant vert
+          </button>
+        </div>
+
+      </div>
+
+      <Component
+        color={color}
+      />
+
     </div>
   );
 }
